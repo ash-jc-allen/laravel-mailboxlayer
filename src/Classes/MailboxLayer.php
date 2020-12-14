@@ -4,6 +4,7 @@ namespace AshAllenDesign\MailboxLayer\Classes;
 
 use AshAllenDesign\MailboxLayer\Exceptions\MailboxLayerException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class MailboxLayer
@@ -35,6 +36,24 @@ class MailboxLayer
     private $smtpCheck = true;
 
     /**
+     * Whether or not the email validation result should
+     * be cached.
+     *
+     * @var bool
+     */
+    private $shouldCache = false;
+
+    /**
+     * Whether or not a fresh result should be fetched from
+     * the API. Setting field this to true will ignore
+     * any cached values. It will also delete the
+     * previously cached result if one exists.
+     *
+     * @var bool
+     */
+    private $fresh = false;
+
+    /**
      * MailboxLayer constructor.
      *
      * @param  string  $apiKey
@@ -55,15 +74,29 @@ class MailboxLayer
      */
     public function check(string $emailAddress): ValidationResult
     {
-        $response = Http::get($this->buildUrl($emailAddress));
+        $cacheKey = $this->buildCacheKey($emailAddress);
 
-        if (isset($response->json()['success']) && ! $response->json()['success']) {
-            $error = $response->json()['error'];
-
-            throw new MailboxLayerException($error['info'], $error['code']);
+        if ($this->fresh) {
+            Cache::forget($cacheKey);
         }
 
-        return ValidationResult::makeFromResponse($response->json());
+        if (! $this->fresh) {
+            $cached = Cache::get($cacheKey);
+
+            if ($cached) {
+                $result = ValidationResult::makeFromResponse(Cache::get($cacheKey));
+            }
+        }
+
+        if (! isset($result)) {
+            $result = $this->fetchFromApi($emailAddress);
+        }
+
+        if ($this->shouldCache) {
+            Cache::forever($cacheKey, (array)$result);
+        }
+
+        return $result;
     }
 
     /**
@@ -84,6 +117,36 @@ class MailboxLayer
         }
 
         return $results;
+    }
+
+    /**
+     * Whether or not the email validation result should
+     * be cached after it's fetched from the API.
+     *
+     * @param  bool  $shouldCache
+     * @return $this
+     */
+    public function shouldCache(bool $shouldCache = true): self
+    {
+        $this->shouldCache = $shouldCache;
+
+        return $this;
+    }
+
+    /**
+     * Whether or not a fresh result should be fetched from
+     * the API. Setting field this to true will ignore
+     * any cached values. It will also delete the
+     * previously cached result if one exists.
+     *
+     * @param  bool  $fresh
+     * @return $this
+     */
+    public function fresh(bool $fresh = true): self
+    {
+        $this->fresh = $fresh;
+
+        return $this;
     }
 
     /**
@@ -119,19 +182,52 @@ class MailboxLayer
     /**
      * Build the URL that the request will be made to.
      *
-     * @param  string  $email
+     * @param  string  $emailAddress
      * @return string
      */
-    private function buildUrl(string $email): string
+    private function buildUrl(string $emailAddress): string
     {
         $protocol = $this->withHttps ? 'https://' : 'http://';
 
         $params = http_build_query([
             'access_key' => $this->apiKey,
-            'email'      => $email,
+            'email'      => $emailAddress,
             'smtp'       => $this->smtpCheck
         ]);
 
         return $protocol.self::BASE_URL.'?'.$params;
+    }
+
+    /**
+     * Make a request to the API and fetch a new result.
+     *
+     * @param  string  $emailAddress
+     * @return ValidationResult
+     * @throws MailboxLayerException
+     */
+    private function fetchFromApi(string $emailAddress): ValidationResult
+    {
+        $response = Http::get($this->buildUrl($emailAddress));
+
+        if (isset($response->json()['success']) && ! $response->json()['success']) {
+            $error = $response->json()['error'];
+
+            throw new MailboxLayerException($error['info'], $error['code']);
+        }
+
+        return ValidationResult::makeFromResponse($response->json());
+    }
+
+    /**
+     * Build and return the key that will be used when
+     * setting or getting the validation result from
+     * the cache.
+     *
+     * @param  string  $emailAddress
+     * @return string
+     */
+    private function buildCacheKey(string $emailAddress): string
+    {
+        return 'mailboxlayer_result_'.$emailAddress;
     }
 }
