@@ -20,7 +20,7 @@
   ],
   "require": {
     "php": "^7.3|^8.0",
-    "illuminate/container": "^6.0|^7.0|^8.0"
+    "illuminate/container": "^7.0|^8.0"
   },
   "require-dev": {
     "mockery/mockery": "^1.0",
@@ -36,7 +36,10 @@
     "laravel": {
       "providers": [
         "AshAllenDesign\\MailboxLayer\\Providers\\MailboxLayerProvider"
-      ]
+      ],
+      "aliases": {
+        "MailboxLayer": "AshAllenDesign\\MailboxLayer\\Facades\\MailboxLayer"
+      }
     }
   }
 }
