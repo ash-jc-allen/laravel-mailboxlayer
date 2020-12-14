@@ -1,6 +1,6 @@
 {
   "name": "ashallendesign/laravel-mailboxlayer",
-  "description": "A Laravel package for validating emails using the Mailbox Layer API.",
+  "description": "A lightweight Laravel package for validating emails using the Mailbox Layer API.",
   "type": "library",
   "homepage": "https://github.com/ash-jc-allen/laravel-mailboxlayer",
   "license": "MIT",
