@@ -3,6 +3,7 @@
 namespace AshAllenDesign\MailboxLayer\Classes;
 
 use AshAllenDesign\MailboxLayer\Exceptions\MailboxLayerException;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
 class MailboxLayer
@@ -48,12 +49,32 @@ class MailboxLayer
         $response = Http::get($this->buildUrl($emailAddress));
 
         if (isset($response->json()['success']) && ! $response->json()['success']) {
-            $error = $response->json(['error']);
+            $error = $response->json()['error'];
 
             throw new MailboxLayerException($error['info'], $error['code']);
         }
 
         return ValidationResult::makeFromResponse($response->json());
+    }
+
+    /**
+     * Run validation checks on more than one email address.
+     * Add each of the results to a Collection and then
+     * return it.
+     *
+     * @param  array  $emailAddresses
+     * @return Collection
+     * @throws MailboxLayerException
+     */
+    public function checkMany(array $emailAddresses): Collection
+    {
+        $results = collect();
+
+        foreach ($emailAddresses as $email) {
+            $results->push($this->check($email));
+        }
+
+        return $results;
     }
 
     /**
