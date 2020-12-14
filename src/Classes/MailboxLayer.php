@@ -93,7 +93,7 @@ class MailboxLayer
         }
 
         if ($this->shouldCache) {
-            Cache::forever($cacheKey, (array)$result);
+            Cache::forever($cacheKey, (array) $result);
         }
 
         return $result;
@@ -192,7 +192,7 @@ class MailboxLayer
         $params = http_build_query([
             'access_key' => $this->apiKey,
             'email'      => $emailAddress,
-            'smtp'       => $this->smtpCheck
+            'smtp'       => $this->smtpCheck,
         ]);
 
         return $protocol.self::BASE_URL.'?'.$params;

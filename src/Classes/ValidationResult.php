@@ -23,7 +23,7 @@ class ValidationResult
 
     /**
      * The local part of the email address. Example:
-     * 'mail' in 'mail@ashallendesign.co.uk'
+     * 'mail' in 'mail@ashallendesign.co.uk'.
      *
      * @var string
      */
@@ -71,7 +71,7 @@ class ValidationResult
 
     /**
      * Whether or not the requested email is a role email
-     * address. Example: 'support@ashallendesign.co.uk'
+     * address. Example: 'support@ashallendesign.co.uk'.
      *
      * @var bool
      */
@@ -112,7 +112,7 @@ class ValidationResult
     {
         $validationResult = new self;
 
-        foreach($response as $fieldName => $value) {
+        foreach ($response as $fieldName => $value) {
             $objectFieldName = Str::camel($fieldName);
             $validationResult->{$objectFieldName} = $value;
         }
