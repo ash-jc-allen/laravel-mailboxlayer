@@ -26,6 +26,15 @@ class MailboxLayer
     private $withHttps = true;
 
     /**
+     * Whether or not to run the SMTP check for the email
+     * address. Setting this to false will decrease the
+     * API response time.
+     *
+     * @var bool
+     */
+    private $smtpCheck = true;
+
+    /**
      * MailboxLayer constructor.
      *
      * @param  string  $apiKey
@@ -92,6 +101,22 @@ class MailboxLayer
     }
 
     /**
+     * Determine whether if an SMTP check should be used
+     * when validating the address. By not running the
+     * SMTP check, the API response time will be
+     * decreased.
+     *
+     * @param  bool  $smtpCheck
+     * @return $this
+     */
+    public function withSmtpCheck(bool $smtpCheck = true): self
+    {
+        $this->smtpCheck = $smtpCheck;
+
+        return $this;
+    }
+
+    /**
      * Build the URL that the request will be made to.
      *
      * @param  string  $email
@@ -103,7 +128,8 @@ class MailboxLayer
 
         $params = http_build_query([
             'access_key' => $this->apiKey,
-            'email'      => $email
+            'email'      => $email,
+            'smtp'       => $this->smtpCheck
         ]);
 
         return $protocol.self::BASE_URL.'?'.$params;
