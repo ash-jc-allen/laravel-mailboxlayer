@@ -209,7 +209,7 @@ class MailboxLayer
     {
         $response = Http::get($this->buildUrl($emailAddress));
 
-        if (isset($response->json()['success']) && ! $response->json()['success']) {
+        if (isset($response->json()['error'])) {
             $error = $response->json()['error'];
 
             throw new MailboxLayerException($error['info'], $error['code']);
