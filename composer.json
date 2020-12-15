@@ -32,6 +32,11 @@
       "AshAllenDesign\\MailboxLayer\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "AshAllenDesign\\MailboxLayer\\Tests\\": "tests/"
+    }
+  },
   "extra": {
     "laravel": {
       "providers": [
