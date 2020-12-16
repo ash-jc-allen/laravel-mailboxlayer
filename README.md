@@ -1,6 +1,4 @@
-<p align="center">
 # Laravel Mailbox Layer
-</p>
 
 <p align="center">
 <a href="https://packagist.org/packages/ashallendesign/laravel-mailboxlayer"><img src="https://img.shields.io/packagist/v/ashallendesign/laravel-mailboxlayer.svg?style=flat-square" alt="Latest Version on Packagist"></a>
