@@ -20,7 +20,8 @@
   ],
   "require": {
     "php": "^7.3|^8.0",
-    "illuminate/container": "^7.0|^8.0"
+    "illuminate/container": "^7.0|^8.0",
+    "guzzlehttp/guzzle": "^6.3|^7.0"
   },
   "require-dev": {
     "mockery/mockery": "^1.0",
