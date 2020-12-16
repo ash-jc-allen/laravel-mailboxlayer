@@ -107,7 +107,7 @@ class CheckManyTest extends TestCase
                 'disposable'   => false,
                 'free'         => false,
                 'score'        => 0.8,
-                'validatedAt' => now()->subDays(5)->startOfDay()
+                'validatedAt' => now()->subDays(5)->startOfDay(),
             ]);
 
         // Set a cached value that we can get.
@@ -127,7 +127,7 @@ class CheckManyTest extends TestCase
                 'disposable'   => true,
                 'free'         => true,
                 'score'        => 0.7,
-                'validatedAt' => now()->subYear()->startOfDay()
+                'validatedAt' => now()->subYear()->startOfDay(),
             ]);
 
         // Assert that the HTTP client is never called.
