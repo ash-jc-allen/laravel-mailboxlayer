@@ -4,15 +4,14 @@ namespace AshAllenDesign\MailboxLayer\Tests\Unit;
 
 use AshAllenDesign\MailboxLayer\Facades\MailboxLayer;
 use AshAllenDesign\MailboxLayer\Providers\MailboxLayerProvider;
-use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends OrchestraTestCase
 {
     /**
-     * Load package service provider.
+     * Get package providers.
      *
-     * @param $app
+     * @param  \Illuminate\Foundation\Application  $app
      *
      * @return array
      */
@@ -22,9 +21,9 @@ abstract class TestCase extends OrchestraTestCase
     }
 
     /**
-     * Load package alias.
+     * Get package aliases.
      *
-     * @param Application $app
+     * @param  \Illuminate\Foundation\Application  $app
      *
      * @return array
      */
