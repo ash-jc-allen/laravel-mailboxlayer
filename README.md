@@ -39,6 +39,10 @@
 Laravel Mailbox Layer is a lightweight wrapper Laravel package that can be used for validating email addresses via the
 [Mailbox Layer API](https://mailboxlayer.com/). The package supports caching so that you can start validating email addresses instantly.
 
+<p align="center">
+<img src="/docs/images/check-image.png" width="400">
+</p>
+
 ## Installation
 
 ### Requirements
