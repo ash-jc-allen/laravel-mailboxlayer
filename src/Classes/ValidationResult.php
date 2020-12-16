@@ -110,10 +110,10 @@ class ValidationResult
      */
     public static function makeFromResponse(array $response): self
     {
-        $validationResult = new self;
+        $validationResult = new static;
 
         foreach ($response as $fieldName => $value) {
-            $objectFieldName = Str::camel($fieldName);
+            $objectFieldName = Str::camel((string) $fieldName);
             $validationResult->{$objectFieldName} = $value;
         }
 
