@@ -112,7 +112,10 @@ class ValidationResult
 
     /**
      * Build a new ValidationObject from the API response
-     * data, set the properties and then return it.
+     * data, set the properties and then return it. If
+     * we are making the object from an API response
+     * rather than from a cached result, we will
+     * also set the validatedAt date.
      *
      * @param  array  $response
      * @return static
@@ -126,7 +129,7 @@ class ValidationResult
             $validationResult->{$objectFieldName} = $value;
         }
 
-        if (! $validationResult->validatedAt) {
+        if (empty($validationResult->validatedAt)) {
             $validationResult->validatedAt = now();
         }
 
