@@ -78,13 +78,11 @@ class MailboxLayer
 
         if ($this->fresh) {
             Cache::forget($cacheKey);
-        }
-
-        if (! $this->fresh) {
+        } else {
             $cached = Cache::get($cacheKey);
 
             if ($cached) {
-                $result = ValidationResult::makeFromResponse(Cache::get($cacheKey));
+                $result = ValidationResult::makeFromResponse($cached);
             }
         }
 
