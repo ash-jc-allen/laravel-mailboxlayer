@@ -74,5 +74,4 @@ class MakeFromResponseTest extends TestCase
         $this->assertEquals(0.8, $newObject->score);
         $this->assertEquals(now(), $newObject->validatedAt);
     }
-
 }
