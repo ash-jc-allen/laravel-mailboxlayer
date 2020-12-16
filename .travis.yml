@@ -35,3 +35,4 @@ before_script:
 
 script:
   - vendor/bin/phpunit
+  - vendor/bin/phpstan analyze src config --level max
