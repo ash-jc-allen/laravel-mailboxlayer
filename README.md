@@ -127,6 +127,7 @@ return MailboxLayer::check('example@domain.com');
 | disposable  | Whether or not the requested email is disposable. Example: 'hello@mailinator.com'.                    |
 | free        | Whether or not the requested email is a free email address.                                           |
 | score       | A score between 0 and 1 reflecting the quality and deliverability of the requested email address.     |
+| validatedAt | A ` Carbon ` object containing the date and time that the original validation API request was made.   |
 
 ### Caching
 #### Caching Validation Results
