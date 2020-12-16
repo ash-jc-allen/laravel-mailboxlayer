@@ -37,8 +37,7 @@
     
 ## Overview
 Laravel Mailbox Layer is a lightweight wrapper Laravel package that can be used for validating email addresses via the
-[Mailbox Layer API](https://mailboxlayer.com/). The package supports caching and contains a validation rule so that you can start
-validating email addresses instantly.
+[Mailbox Layer API](https://mailboxlayer.com/). The package supports caching so that you can start validating email addresses instantly.
 
 ## Installation
 
@@ -127,6 +126,7 @@ return MailboxLayer::check('example@domain.com');
 | disposable  | Whether or not the requested email is disposable. Example: 'hello@mailinator.com'.                    |
 | free        | Whether or not the requested email is a free email address.                                           |
 | score       | A score between 0 and 1 reflecting the quality and deliverability of the requested email address.     |
+| validatedAt | A ` Carbon ` object containing the date and time that the original validation API request was made.   |
 
 ### Caching
 #### Caching Validation Results
@@ -136,6 +136,9 @@ you try to validate the email again, due to the fact that the results will be fe
 As an example, if you were importing a CSV containing email addresses, you might want to validate each of the addresses. However, if the
 CSV contains some duplicated email addresses, it could lead to unnecessary API calls being made. So, by using the caching, each unique
 address would only be fetched once from the API. To do this, you can use the ` shouldCache() ` method.
+
+Using caching is recommended as it reduces the chances of you reaching the monthly request limits or rate limits that are
+used by Mailbox Layer. Read more about the [API limits here](https://mailboxlayer.com/documentation#rate_limits).
 
 The example below shows how to cache the validation results:
 

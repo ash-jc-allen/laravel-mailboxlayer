@@ -7,12 +7,20 @@ use AshAllenDesign\MailboxLayer\Classes\ValidationResult;
 use AshAllenDesign\MailboxLayer\Exceptions\MailboxLayerException;
 use AshAllenDesign\MailboxLayer\Facades\MailboxLayer as MailboxLayerFacade;
 use AshAllenDesign\MailboxLayer\Tests\Unit\TestCase;
+use Carbon\Carbon;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class CheckTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        Carbon::setTestNow(now());
+    }
+
     /** @test */
     public function result_is_returned_from_cache_if_fresh_is_set_to_false_and_it_exists_in_the_cache()
     {
@@ -98,7 +106,7 @@ class CheckTest extends TestCase
         Cache::shouldReceive('forever')
             ->withArgs([
                 'mailboxlayer_result_mail@ashallendesign.co.uk',
-                $this->responseStructure(),
+                array_merge($this->responseStructure(), ['validatedAt' => now()]),
             ])
             ->once()
             ->andReturnTrue();
@@ -238,5 +246,6 @@ class CheckTest extends TestCase
         $this->assertEquals(false, $result->disposable);
         $this->assertEquals(false, $result->free);
         $this->assertEquals(0.8, $result->score);
+        $this->assertEquals(now(), $result->validatedAt);
     }
 }
