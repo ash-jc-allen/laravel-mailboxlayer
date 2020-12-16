@@ -2,6 +2,7 @@
 
 namespace AshAllenDesign\MailboxLayer\Classes;
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class ValidationResult
@@ -102,6 +103,14 @@ class ValidationResult
     public $score;
 
     /**
+     * The date amd time when the validation check was run
+     *  via API.
+     *
+     * @var Carbon
+     */
+    public $validatedAt;
+
+    /**
      * Build a new ValidationObject from the API response
      * data, set the properties and then return it.
      *
@@ -115,6 +124,10 @@ class ValidationResult
         foreach ($response as $fieldName => $value) {
             $objectFieldName = Str::camel((string) $fieldName);
             $validationResult->{$objectFieldName} = $value;
+        }
+
+        if (! $validationResult->validatedAt) {
+            $validationResult->validatedAt = now();
         }
 
         return $validationResult;
