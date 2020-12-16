@@ -5,11 +5,11 @@ namespace AshAllenDesign\MailboxLayer\Tests\Unit\Classes\MailboxLayer;
 use AshAllenDesign\MailboxLayer\Classes\MailboxLayer;
 use AshAllenDesign\MailboxLayer\Classes\ValidationResult;
 use AshAllenDesign\MailboxLayer\Exceptions\MailboxLayerException;
+use AshAllenDesign\MailboxLayer\Facades\MailboxLayer as MailboxLayerFacade;
 use AshAllenDesign\MailboxLayer\Tests\Unit\TestCase;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use AshAllenDesign\MailboxLayer\Facades\MailboxLayer as MailboxLayerFacade;
 
 class CheckTest extends TestCase
 {
@@ -98,7 +98,7 @@ class CheckTest extends TestCase
         Cache::shouldReceive('forever')
             ->withArgs([
                 'mailboxlayer_result_mail@ashallendesign.co.uk',
-                $this->responseStructure()
+                $this->responseStructure(),
             ])
             ->once()
             ->andReturnTrue();
@@ -222,7 +222,7 @@ class CheckTest extends TestCase
                 'code' => '101',
                 'type' => 'invalid_access_key',
                 'info' => 'You have not supplied a valid API Access Key. [Technical Support: support@apilayer.com]',
-            ]
+            ],
         ];
     }
 

@@ -20,7 +20,7 @@ class MakeFromResponseTest extends TestCase
             'role'         => true,
             'disposable'   => false,
             'free'         => false,
-            'score'        => 0.8
+            'score'        => 0.8,
         ];
 
         $newObject = ValidationResult::makeFromResponse($responseData);
