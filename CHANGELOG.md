@@ -1,5 +1,8 @@
 # Changelog
 
+**1.0.1 (released 2020-12-31):**
+- Added the package logo to the documentation.
+
 **1.0.0 (released 2020-12-16):**
 - Improved code quality.
 - Added documentation.
