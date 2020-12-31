@@ -240,6 +240,7 @@ pass and write more if needed.
 ## Credits
 
 - [Ash Allen](https://ashallendesign.co.uk)
+- [Jess Pickup](https://jesspickup.co.uk) (Logo)
 - [All Contributors](https://github.com/ash-jc-allen/laravel-mailboxlayer/graphs/contributors)
 
 ## Changelog
