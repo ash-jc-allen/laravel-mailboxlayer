@@ -1,4 +1,6 @@
-# Laravel Mailbox Layer
+<p align="center">
+<img src="https://ashallendesign.co.uk/images/custom/laravel-mailbox-layer-logo.png" alt="Laravel Mailbox Layer" width="600">
+</p>
 
 <p align="center">
 <a href="https://packagist.org/packages/ashallendesign/laravel-mailboxlayer"><img src="https://img.shields.io/packagist/v/ashallendesign/laravel-mailboxlayer.svg?style=flat-square" alt="Latest Version on Packagist"></a>
@@ -14,7 +16,7 @@
 - [Installation](#installation)
     - [Requirements](#requirements)
     - [Install the Package](#install-the-package)
-    - [Publish the Config and Migrations](#publish-the-config-and-migrations)
+    - [Publish the Config](#publish-the-config)
     - [Getting Your Mailbox Layer API Key](#getting-your-mailbox-layer-api-key)
 - [Usage](#usage)
     - [Methods](#methods)
@@ -56,7 +58,7 @@ You can install the package via Composer:
 composer require ashallendesign/laravel-mailboxlayer
 ```
 
-### Publish the Config and Migrations
+### Publish the Config
 You can then publish the package's config file (so that you can make changes to them) by using the following command:
 ```bash
 php artisan vendor:publish --provider="AshAllenDesign\MailboxLayer\Providers\MailboxLayerProvider"
