@@ -29,16 +29,16 @@ class MakeFromResponseTest extends TestCase
 
         $newObject = ValidationResult::makeFromResponse($responseData);
 
-        $this->assertEquals('mai1l@ashallendesign.co.uk', $newObject->email);
-        $this->assertEquals('mail@ashallendesign.co.uk', $newObject->didYouMean);
-        $this->assertEquals('mai1l', $newObject->user);
-        $this->assertEquals('ashallendesign.co.uk', $newObject->domain);
-        $this->assertEquals(true, $newObject->formatValid);
-        $this->assertEquals(true, $newObject->smtpCheck);
-        $this->assertEquals(true, $newObject->role);
-        $this->assertEquals(false, $newObject->disposable);
-        $this->assertEquals(false, $newObject->free);
-        $this->assertEquals(0.8, $newObject->score);
+        $this->assertSame('mai1l@ashallendesign.co.uk', $newObject->email);
+        $this->assertSame('mail@ashallendesign.co.uk', $newObject->didYouMean);
+        $this->assertSame('mai1l', $newObject->user);
+        $this->assertSame('ashallendesign.co.uk', $newObject->domain);
+        $this->assertTrue($newObject->formatValid);
+        $this->assertTrue($newObject->smtpCheck);
+        $this->assertTrue($newObject->role);
+        $this->assertFalse($newObject->disposable);
+        $this->assertFalse($newObject->free);
+        $this->assertSame(0.8, $newObject->score);
         $this->assertEquals(now(), $newObject->validatedAt);
     }
 
@@ -62,16 +62,16 @@ class MakeFromResponseTest extends TestCase
 
         $newObject = ValidationResult::makeFromResponse($responseData);
 
-        $this->assertEquals('mai1l@ashallendesign.co.uk', $newObject->email);
-        $this->assertEquals('mail@ashallendesign.co.uk', $newObject->didYouMean);
-        $this->assertEquals('mai1l', $newObject->user);
-        $this->assertEquals('ashallendesign.co.uk', $newObject->domain);
-        $this->assertEquals(true, $newObject->formatValid);
-        $this->assertEquals(true, $newObject->smtpCheck);
-        $this->assertEquals(true, $newObject->role);
-        $this->assertEquals(false, $newObject->disposable);
-        $this->assertEquals(false, $newObject->free);
-        $this->assertEquals(0.8, $newObject->score);
+        $this->assertSame('mai1l@ashallendesign.co.uk', $newObject->email);
+        $this->assertSame('mail@ashallendesign.co.uk', $newObject->didYouMean);
+        $this->assertSame('mai1l', $newObject->user);
+        $this->assertSame('ashallendesign.co.uk', $newObject->domain);
+        $this->assertTrue($newObject->formatValid);
+        $this->assertTrue($newObject->smtpCheck);
+        $this->assertTrue($newObject->role);
+        $this->assertFalse($newObject->disposable);
+        $this->assertFalse($newObject->free);
+        $this->assertSame(0.8, $newObject->score);
         $this->assertEquals(now(), $newObject->validatedAt);
     }
 }

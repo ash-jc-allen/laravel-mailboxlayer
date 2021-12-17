@@ -236,16 +236,16 @@ class CheckTest extends TestCase
 
     private function assertValidationResultIsCorrect(ValidationResult $result): void
     {
-        $this->assertEquals('mail@ashallendesign.co.uk', $result->email);
-        $this->assertEquals('', $result->didYouMean);
-        $this->assertEquals('mail', $result->user);
-        $this->assertEquals('ashallendesign.co.uk', $result->domain);
-        $this->assertEquals(true, $result->formatValid);
-        $this->assertEquals(true, $result->smtpCheck);
-        $this->assertEquals(true, $result->role);
-        $this->assertEquals(false, $result->disposable);
-        $this->assertEquals(false, $result->free);
-        $this->assertEquals(0.8, $result->score);
+        $this->assertSame('mail@ashallendesign.co.uk', $result->email);
+        $this->assertSame('', $result->didYouMean);
+        $this->assertSame('mail', $result->user);
+        $this->assertSame('ashallendesign.co.uk', $result->domain);
+        $this->assertTrue($result->formatValid);
+        $this->assertTrue($result->smtpCheck);
+        $this->assertTrue($result->role);
+        $this->assertFalse($result->disposable);
+        $this->assertFalse($result->free);
+        $this->assertSame(0.8, $result->score);
         $this->assertEquals(now(), $result->validatedAt);
     }
 }
