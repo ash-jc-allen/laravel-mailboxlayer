@@ -70,6 +70,7 @@ class MailboxLayer
      *
      * @param  string  $emailAddress
      * @return ValidationResult
+     *
      * @throws MailboxLayerException
      */
     public function check(string $emailAddress): ValidationResult
@@ -104,6 +105,7 @@ class MailboxLayer
      *
      * @param  array  $emailAddresses
      * @return Collection
+     *
      * @throws MailboxLayerException
      */
     public function checkMany(array $emailAddresses): Collection
@@ -201,6 +203,7 @@ class MailboxLayer
      *
      * @param  string  $emailAddress
      * @return ValidationResult
+     *
      * @throws MailboxLayerException
      */
     private function fetchFromApi(string $emailAddress): ValidationResult
