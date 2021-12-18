@@ -60,30 +60,30 @@ class CheckManyTest extends TestCase
         $mailboxLayer = new MailboxLayer(123);
 
         $result = $mailboxLayer->checkMany(['mail@ashallendesign.co.uk', 'support1@ashallendesign.co.uk']);
-        $this->assertEquals(Collection::class, get_class($result));
+        $this->assertInstanceOf(Collection::class, $result);
 
-        $this->assertEquals('mail@ashallendesign.co.uk', $result[0]->email);
-        $this->assertEquals('', $result[0]->didYouMean);
-        $this->assertEquals('mail', $result[0]->user);
-        $this->assertEquals('ashallendesign.co.uk', $result[0]->domain);
-        $this->assertEquals(true, $result[0]->formatValid);
-        $this->assertEquals(true, $result[0]->smtpCheck);
-        $this->assertEquals(true, $result[0]->role);
-        $this->assertEquals(false, $result[0]->disposable);
-        $this->assertEquals(false, $result[0]->free);
-        $this->assertEquals(0.8, $result[0]->score);
+        $this->assertSame('mail@ashallendesign.co.uk', $result[0]->email);
+        $this->assertSame('', $result[0]->didYouMean);
+        $this->assertSame('mail', $result[0]->user);
+        $this->assertSame('ashallendesign.co.uk', $result[0]->domain);
+        $this->assertTrue($result[0]->formatValid);
+        $this->assertTrue($result[0]->smtpCheck);
+        $this->assertTrue($result[0]->role);
+        $this->assertFalse($result[0]->disposable);
+        $this->assertFalse($result[0]->free);
+        $this->assertSame(0.8, $result[0]->score);
         $this->assertEquals(now(), $result[0]->validatedAt);
 
-        $this->assertEquals('support1@ashallendesign.co.uk', $result[1]->email);
-        $this->assertEquals('support@ashallendesign.co.uk', $result[1]->didYouMean);
-        $this->assertEquals('support1', $result[1]->user);
-        $this->assertEquals('ashallendesign.co.uk', $result[1]->domain);
-        $this->assertEquals(false, $result[1]->formatValid);
-        $this->assertEquals(false, $result[1]->smtpCheck);
-        $this->assertEquals(false, $result[1]->role);
-        $this->assertEquals(true, $result[1]->disposable);
-        $this->assertEquals(true, $result[1]->free);
-        $this->assertEquals(0.7, $result[1]->score);
+        $this->assertSame('support1@ashallendesign.co.uk', $result[1]->email);
+        $this->assertSame('support@ashallendesign.co.uk', $result[1]->didYouMean);
+        $this->assertSame('support1', $result[1]->user);
+        $this->assertSame('ashallendesign.co.uk', $result[1]->domain);
+        $this->assertFalse($result[1]->formatValid);
+        $this->assertFalse($result[1]->smtpCheck);
+        $this->assertFalse($result[1]->role);
+        $this->assertTrue($result[1]->disposable);
+        $this->assertTrue($result[1]->free);
+        $this->assertSame(0.7, $result[1]->score);
         $this->assertEquals(now(), $result[1]->validatedAt);
     }
 
@@ -136,30 +136,30 @@ class CheckManyTest extends TestCase
         $mailboxLayer = new MailboxLayer(123);
 
         $result = $mailboxLayer->checkMany(['mail@ashallendesign.co.uk', 'support1@ashallendesign.co.uk']);
-        $this->assertEquals(Collection::class, get_class($result));
+        $this->assertInstanceOf(Collection::class, $result);
 
-        $this->assertEquals('mail@ashallendesign.co.uk', $result[0]->email);
-        $this->assertEquals('', $result[0]->didYouMean);
-        $this->assertEquals('mail', $result[0]->user);
-        $this->assertEquals('ashallendesign.co.uk', $result[0]->domain);
-        $this->assertEquals(true, $result[0]->formatValid);
-        $this->assertEquals(true, $result[0]->smtpCheck);
-        $this->assertEquals(true, $result[0]->role);
-        $this->assertEquals(false, $result[0]->disposable);
-        $this->assertEquals(false, $result[0]->free);
-        $this->assertEquals(0.8, $result[0]->score);
+        $this->assertSame('mail@ashallendesign.co.uk', $result[0]->email);
+        $this->assertSame('', $result[0]->didYouMean);
+        $this->assertSame('mail', $result[0]->user);
+        $this->assertSame('ashallendesign.co.uk', $result[0]->domain);
+        $this->assertTrue($result[0]->formatValid);
+        $this->assertTrue($result[0]->smtpCheck);
+        $this->assertTrue($result[0]->role);
+        $this->assertFalse($result[0]->disposable);
+        $this->assertFalse($result[0]->free);
+        $this->assertSame(0.8, $result[0]->score);
         $this->assertEquals(now()->subDays(5)->startOfDay(), $result[0]->validatedAt);
 
-        $this->assertEquals('support1@ashallendesign.co.uk', $result[1]->email);
-        $this->assertEquals('support@ashallendesign.co.uk', $result[1]->didYouMean);
-        $this->assertEquals('support1', $result[1]->user);
-        $this->assertEquals('ashallendesign.co.uk', $result[1]->domain);
-        $this->assertEquals(false, $result[1]->formatValid);
-        $this->assertEquals(false, $result[1]->smtpCheck);
-        $this->assertEquals(false, $result[1]->role);
-        $this->assertEquals(true, $result[1]->disposable);
-        $this->assertEquals(true, $result[1]->free);
-        $this->assertEquals(0.7, $result[1]->score);
+        $this->assertSame('support1@ashallendesign.co.uk', $result[1]->email);
+        $this->assertSame('support@ashallendesign.co.uk', $result[1]->didYouMean);
+        $this->assertSame('support1', $result[1]->user);
+        $this->assertSame('ashallendesign.co.uk', $result[1]->domain);
+        $this->assertFalse($result[1]->formatValid);
+        $this->assertFalse($result[1]->smtpCheck);
+        $this->assertFalse($result[1]->role);
+        $this->assertTrue($result[1]->disposable);
+        $this->assertTrue($result[1]->free);
+        $this->assertSame(0.7, $result[1]->score);
         $this->assertEquals(now()->subYear()->startOfDay(), $result[1]->validatedAt);
     }
 }
